@@ -74,6 +74,7 @@ for (let i = 0; i < posts.length; i++) {
     container.innerHTML += templateDiv;
 
     // Rendiamo il tasto “Mi Piace” cliccabile con incremento del counter dei likes.
+    // Al click su un pulsante “Mi Piace” di un post, incrementare il contatore di like al post e cambiare colore al testo del bottone.
     const likeButtons = document.querySelectorAll(`.like-button`);
     const likeCounters = document.querySelectorAll(`.my-class`);
     console.log(likeCounters)
