@@ -2,7 +2,6 @@
 // Creiamo il nostro array di oggetti che rappresentano ciascun post. Ogni post dovrà avere le informazioni necessarie per stampare la relativa card: nome autore, foto profilo, data in formato americano, testo del post, immagine (non tutti i post devono avere una immagine), numero di likes.
 
 const container = document.getElementById(`container`);
-
 const posts = [
     {
         author: `Phil Mangione`,
@@ -10,31 +9,31 @@ const posts = [
         date: `4 mesi fa`,
         text: `Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.`,
         image: `https://unsplash.it/600/300?image=171`,
-        likes: 80
+        likes: Math.floor(Math.random() * 1236),
     },
     {
-        author: `Phil Mangione`,
-        photo: `https://unsplash.it/300/300?image=15`,
+        author: `Ciccio Pennello`,
+        photo: `https://unsplash.it/300/300?image=18`,
         date: `4 mesi fa`,
-        text: `Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.`,
-        image: `https://unsplash.it/600/300?image=171`,
-        likes: 80
+        text: `Traditional Tuscan cuisine! Da Ciccio Pennello, in Sesto Fiorentino, we offer the most famous and appreciated specialties of traditional Tuscan cuisine.`,
+        image: `http://www.amioparere.com/images/locali/398d-ciccio-pennello.jpg`,
+        likes: Math.floor(Math.random() * 1236),
     },
     {
-        author: `Phil Mangione`,
-        photo: `https://unsplash.it/300/300?image=15`,
+        author: `Leonardo Brancamenta`,
+        photo: `https://unsplash.it/300/300?image=22`,
         date: `4 mesi fa`,
-        text: `Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.`,
-        image: `https://unsplash.it/600/300?image=171`,
-        likes: 80
+        text: `BrancaMenta is a mint flavored version of Fernet-Branca. Its surprising formula, composed of herbs and spices, is enriched with the essential oil of Piedmontese peppermint, the finest in the world. The result is a high quality, natural and particularly refreshing bitter liqueur.`,
+        image: ``,
+        likes: Math.floor(Math.random() * 1236),
     },
     {
-        author: `Phil Mangione`,
-        photo: `https://unsplash.it/300/300?image=15`,
-        date: `4 mesi fa`,
-        text: `Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.`,
-        image: `https://unsplash.it/600/300?image=171`,
-        likes: 80
+        author: `Acqua Panna`,
+        photo: `https://unsplash.it/300/300?image=36`,
+        date: `5 mesi fa`,
+        text: `Acqua Panna® A unique taste and mineral composition obtained after a 14-year journey in which every drop flows and is filtered by the rocks of the sunny Tuscan hills. Thus a water with a soft taste is born, a unique water.`,
+        image: `https://unsplash.it/600/300?image=306`,
+        likes: Math.floor(Math.random() * 1236),
     }   
 ]
 // Prendendo come riferimento il layout di esempio presente nell’html, stampiamo i post del nostro feed.
@@ -66,14 +65,40 @@ for (let i = 0; i < posts.length; i++) {
                 </a>
             </div>
             <div class="likes__counter">
-                Piace a <b id="like-counter-1" class="js-likes-counter">${post.likes}</b> persone
+                Piace a <b id="like-counter-1" class="js-likes-counter my-class">${post.likes}</b> persone
             </div>
         </div> 
     </div>            
     </div>
     `
     container.innerHTML += templateDiv;
+
+    // Rendiamo il tasto “Mi Piace” cliccabile con incremento del counter dei likes.
+    const likeButtons = document.querySelectorAll(`.like-button`);
+    const likeCounters = document.querySelectorAll(`.my-class`);
+    console.log(likeCounters)
+    const likeButtonsArray = Array.from(likeButtons);
+    const likeCountersArray = Array.from(likeCounters)
+    for (let x = 0; x < likeButtonsArray.length; x++) {
+        const post = posts[x];
+        let likeButton = likeButtonsArray[x];
+        let likeCounter = likeCountersArray[x];
+        console.log(likeCountersArray)
+        likeButton.addEventListener(`click`, function(event){
+            event.preventDefault();
+            const buttonClasses = likeButton.classList.length
+            if (buttonClasses > 1){
+                likeButton.classList.add(`like-button--liked`);
+                likeCounter.innerHTML = post.likes + 1
+            }   
+            else if (buttonClasses > 2){//da rivere(?)
+                likeButton.classList.remove(`like-button--liked`);
+            }
+        })
+    }
   }
 
 
-// Rendiamo il tasto “Mi Piace” cliccabile con incremento del counter dei likes.
+
+
+
